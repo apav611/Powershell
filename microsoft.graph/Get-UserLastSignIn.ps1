@@ -10,7 +10,7 @@ Install-Module Microsoft.Graph
 
 # variables
 # daysOld must be a negative integer
-$daysOld = -90
+$daysOld = -10
 
 # calculate date
 $xAgoDate = (get-date).AddDays($daysOld)
