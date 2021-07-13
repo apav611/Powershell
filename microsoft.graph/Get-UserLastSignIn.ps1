@@ -1,3 +1,11 @@
+<#
+.SYNOPSIS
+    Find inactive users in Azure Ad
+.DESCRIPTION
+    The following script gets all users who haven't signed-in since the define variable $daysOld.
+#>
+
+#install graph PS module
 Install-Module Microsoft.Graph
 
 # variables
