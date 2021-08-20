@@ -7,10 +7,16 @@
 
 param(
     [Parameter(Mandatory)]
+    [string]$sourceSubscriptionID,
+
+    [Parameter(Mandatory)]
     [string]$sourceResourceGroup,
     
     [Parameter(Mandatory)]
     [string]$sourceRouteTableName,
+
+    [Parameter(Mandatory)]
+    [string]$destinationSubscriptionID,
 
     [Parameter(Mandatory)]
     [string]$destinationResourceGroup,
@@ -22,6 +28,9 @@ param(
     [string]$destinationLocation
 )
 
+# set context to source subsription
+Set-AzContext $sourceSubscriptionID
+
 # get routes from source route table
 $sourceRoutes = (Get-azRoutetable -ResourceGroupName $sourceResourceGroup `
                                   -Name $sourceRouteTableName).Routes
@@ -31,6 +40,9 @@ if (!$sourceRoutes) {
     Write-Output "Error: no routes found in source Route table"
     throw
 }
+
+# set context to destination subsription
+Set-AzContext $desitnationSubscriptionID
 
 # Create route table
 $newRouteTable = New-AzRouteTable -Name $destinationRouteTableName `
